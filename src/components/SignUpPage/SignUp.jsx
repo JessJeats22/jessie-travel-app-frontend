@@ -1,52 +1,89 @@
+import { useState } from 'react';
 import './SignUp.css'
-// Import the useContext hook
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { signUpService } from '../../services/auth'
+import { useNavigate } from 'react-router'
 
-// import { signUp } from '../../services/authService';
 
-// Import the UserContext object
-import { UserContext } from '../../contexts/UserContext';
 
 const SignUp = () => {
+    const [formData, setFormData] = useState({
+        name: "",
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    })
 
-    const navigate = useNavigate();
-  // Pass the UserContext object to the useContext hook to access:
-  // - The user state (which we're not using here).
-  // - The setUser function to update the user state (which we are using).
-  //
-  // Destructure the object returned by the useContext hook for easy access
-  // to the data we added to the context with familiar names.
-  const { setUser } = useContext(UserContext);
-  const [message, setMessage] = useState('');
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    passwordConf: '',
-  });
+    const [errorData, setErrorData] = useState({})
 
-  // formData destructuring and handleChange function.
+    // Location variables
+    const navigate = useNavigate()
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    try {
-      const newUser = await signUp(formData);
-      // Call the setUser function to update the user state, just like normal.
-      setUser(newUser);
-      // Take the user to the (non-existent) home page after they sign up.
-      // We'll get to this shortly!
-      navigate('/');
-    } catch (err) {
-      setMessage(err.message);
+    // Functions
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+        setErrorData({ ...errorData, [e.target.name]: '' })
     }
-  };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            await signUpService(formData);
+            navigate('/sign-in')
+        } catch (error) {
+            console.log("Backend error:", error.response.data);
+            setErrorData(error.response.data)
+
+        }
+
+    }
+
+    return (
+        <>
+            <h1>Sign Up</h1>
+            <form onSubmit={handleSubmit}>
+
+                <div className="form-control">
+                    <label hidden htmlFor="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder='name' onChange={handleChange} />
+                   { errorData.name && <p className='error-message'>{errorData.name}</p> }
+                </div>
+
+                <div className="form-control">
+                    <label hidden htmlFor="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder='Username' onChange={handleChange} />
+                    { errorData.username && <p className='error-message'>{errorData.username}</p> }
+                </div>
 
 
-return (
-    <h1>
-        Sign Up
-    </h1>
-)
+                <div className="form-control">
+                    <label hidden htmlFor="email">Email</label>
+                    <input type="text" name="email" id="email" placeholder='email' onChange={handleChange} />
+                    { errorData.email && <p className='error-message'>{errorData.email}</p> }
+                </div>
+
+                <div className="form-control">
+                    <label hidden htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder='password' onChange={handleChange} />
+                       { errorData.password && <p className='error-message'>{errorData.password}</p> }
+                </div>
+
+
+                <div className="form-control">
+                    <label hidden htmlFor="confirmPassword">Re-type your password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder='Confirm Password' onChange={handleChange} />
+                     { errorData.confirmPassword && <p className='error-message'>{errorData.confirmPassword}</p> }
+                </div>
+
+                <button type="submit">Create account</button>
+
+                {errorData.message && <p className='error-message'>{errorData.message}</p> }
+
+            </form>
+
+        </>
+    )
 }
 
 
