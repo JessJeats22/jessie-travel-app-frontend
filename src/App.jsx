@@ -1,5 +1,5 @@
-// src/App.jsx
 
+import './App.css'
 import NavBar from './components/NavBar/NavBar';
 
 const App = () => {
@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <h1>Hello, friend!</h1>
+    
     </>
   );
 };
