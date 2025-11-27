@@ -11,7 +11,7 @@ import HomePage from './components/HomePage/Home'
 import SignInPage from './components/SignInPage/SignIn'
 import SignupPage from './components/SignUpPage/SignUp'
 import CountryIndex from './components/CountryIndex/CountryIndex'
-import CountryShow from './components/CountryShow/CountryShow'
+import CountryDetails from './components/CountryDetails/CountryDetails'
 
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/sign-up" element ={<SignupPage />} />
           <Route path="/countries" element ={<CountryIndex />} />
-          <Route path="/countries/:countryId" element ={<CountryShow />} />
+          <Route path="/countries/:countryId" element ={<CountryDetails />} />
         </Routes>
 
       </main>
