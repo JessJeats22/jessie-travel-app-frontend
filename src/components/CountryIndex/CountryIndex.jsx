@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import {countryIndex} from '../../services/country'
 
 import { Link } from 'react-router'
+import LoadingIcon from '../LoadingIcon/LoadingIcon'
 
 const CountryIndex = () => {
     const [countries, setCountries] = useState ([])
@@ -33,7 +34,7 @@ const CountryIndex = () => {
    { errorData.message
         ? <p className='error-message'>{errorData.message}</p>
         : isLoading
-        ? <p>Loading...</p>
+        ? <LoadingIcon />
         : countries.map(country => {
               return (
                 <div key={country._id} className='country-card'>
