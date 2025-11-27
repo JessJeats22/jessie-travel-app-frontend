@@ -1,0 +1,93 @@
+.travelpost-details-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.travelpost-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--deep-slate);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.travelpost-details-card {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.travelpost-details-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.travelpost-details-card li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--blue-sky);
+}
+
+.travelpost-details-card li:last-child {
+  border-bottom: none;
+}
+
+/* Label on left */
+.label {
+  font-weight: 600;
+  color: var(--deep-slate);
+  width: 40%;
+}
+
+.value {
+  text-align: center;
+  width: 55%;
+  color: var(--deep-slate);
+  opacity: 0.85;
+}
+
+
+/* Image row */
+.image-item {
+  align-items: flex-start;
+}
+
+.travelpost-image {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-top: 0.5rem;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .travelpost-details-card li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .label,
+  .value {
+    width: 100%;
+    text-align: left;
+  }
+
+  .value {
+    margin-top: 0.25rem;
+  }
+}
