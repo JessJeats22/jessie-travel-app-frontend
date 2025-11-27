@@ -1,0 +1,45 @@
+/* Wrapper around all country cards */
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+
+/* Each card */
+.country-card {
+  background: white;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.country-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Card title */
+.country-card h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  color: var(--deep-slate);
+}
+
+/* Card description */
+.country-card p {
+  color: var(--deep-slate);
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  margin-top: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
