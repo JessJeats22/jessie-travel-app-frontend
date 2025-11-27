@@ -1,0 +1,98 @@
+import './CountryDetails.css'
+import { useParams } from 'react-router'
+import { useEffect, useState } from 'react'
+import { countryShow } from '../../services/country'
+import LoadingIcon from '../LoadingIcon/LoadingIcon'
+
+const CountryDetails = () => {
+    const [country, setCountry] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [errorData, setErrorData] = useState({})
+    
+    const { countryId } = useParams()
+    console.log("PARAMS:", useParams())
+   
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const { data } = await countryShow(countryId)
+                console.log("API RESPONSE:", data)
+                setCountry(data.country)
+            } catch (error) {
+                console.log(error)
+                setErrorData(error.response.data)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+        getData()
+    }, [countryId])
+
+    return (
+        <div className="country-details-container">
+
+            <h1 className="country-title">
+                {country?.name || "Country Details"}
+            </h1>
+
+            {errorData.message ? (
+                <p className='error-message'>{errorData.message}</p>
+            ) : isLoading ? (
+                <LoadingIcon />
+            ) : !country ? (
+                <p>Nothing to display.</p>
+            ) : (
+                <section className="country-details-card">
+                    <ul>
+
+                        <li>
+                            <span className="label">Population:</span>
+                            <span className="value">{country.population?.toLocaleString()}</span>
+                        </li>
+
+                        <li className="flag-item">
+                            <span className="label">Flag:</span>
+                            {country.flag ? (
+                                <img className="flag" src={country.flag} alt={`${country.name} flag`} />
+                            ) : (
+                                <span className="value">N/A</span>
+                            )}
+                        </li>
+
+                        <li>
+                            <span className="label">Description:</span>
+                            <span className="value">{country.description}</span>
+                        </li>
+
+                        <li>
+                            <span className="label">Continent:</span>
+                            <span className="value">{country.continent}</span>
+                        </li>
+
+                        <li>
+                            <span className="label">Languages:</span>
+                            <span className="value">
+                                {Array.isArray(country.languages)
+                                    ? country.languages.join(", ")
+                                    : country.languages}
+                            </span>
+                        </li>
+
+                        <li>
+                            <span className="label">Currency:</span>
+                            <span className="value">{country.currency}</span>
+                        </li>
+
+                        <li>
+                            <span className="label">Created by:</span>
+                            <span className="value">{country.createdBy}</span>
+                        </li>
+
+                    </ul>
+                </section>
+            )}
+        </div>
+    )
+}
+
+export default CountryDetails

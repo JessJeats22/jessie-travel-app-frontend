@@ -1,0 +1,71 @@
+/* ============================= */
+/* 🌍 Country Details Page Style */
+/* ============================= */
+
+.country-details-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Page title */
+.country-title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--deep-slate);
+  margin-bottom: 1.5rem;
+}
+
+/* Card container */
+.country-details-card {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* List styling */
+.country-details-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Label + Value styling */
+.country-details-card li {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--green-forest);
+  margin-bottom: 0.3rem;
+  font-size: 1.1rem;
+}
+
+.value {
+  color: var(--deep-slate);
+  font-size: 1rem;
+}
+
+/* Flag image */
+.flag-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.flag {
+  margin-top: 0.5rem;
+  width: 200px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 1rem;
+}

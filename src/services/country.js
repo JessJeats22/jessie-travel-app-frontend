@@ -7,3 +7,7 @@ const api = axios.create({
 export const countryIndex = () => {
     return api.get("")
 }
+
+export const countryShow = (countryId) => {
+    return api.get(`/${countryId}`)
+}
