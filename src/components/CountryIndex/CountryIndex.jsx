@@ -13,7 +13,7 @@ const CountryIndex = () => {
 
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchCountries = async () => {
         try {
             const {data} = await countryIndex()
             setCountries(data)
@@ -24,7 +24,7 @@ const CountryIndex = () => {
             setIsLoading(false)
         }
     }
-    getData()
+    fetchCountries()
   }, []);
 
   return(

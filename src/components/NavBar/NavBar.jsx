@@ -19,7 +19,7 @@ const NavBar = () => {
                 {user ? (
                     <>
                         <Link to="/travel-posts">Travel Posts</Link>
-                        <Link to="/create-post">Create Post</Link>
+                        <Link to="/travelpost/new">Create Post</Link>
                         <Link to="/sign-in" onClick={signOut}>Sign out</Link>
                     </>
                 ) : (
