@@ -12,6 +12,7 @@ import SignInPage from './components/SignInPage/SignIn'
 import SignupPage from './components/SignUpPage/SignUp'
 import CountryIndex from './components/CountryIndex/CountryIndex'
 import CountryDetails from './components/CountryDetails/CountryDetails'
+import TravelPostCreate from './components/TravelPostCreate/TravelPostCreate';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/sign-up" element ={<SignupPage />} />
           <Route path="/countries" element ={<CountryIndex />} />
           <Route path="/countries/:countryId" element ={<CountryDetails />} />
+          <Route path="/travelpost/new" element={<TravelPostCreate />} />
         </Routes>
 
       </main>
