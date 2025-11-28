@@ -39,5 +39,10 @@ export const deleteTravelPost = (id) => {
 }
 
 
-
-
+export const updateTravelPost = (travelPostId, formData) => {
+  return api.put(`/${travelPostId}`, formData, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  })
+}

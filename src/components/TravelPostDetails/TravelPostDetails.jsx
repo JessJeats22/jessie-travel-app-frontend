@@ -2,25 +2,25 @@ import './TravelPostDetails.css'
 import { useParams, useNavigate } from 'react-router'
 import { useEffect, useState, useContext } from 'react'
 import LoadingIcon from '../LoadingIcon/LoadingIcon'
-import {showTravelPost}  from '../../services/travelPosts'
+import { showTravelPost } from '../../services/travelPosts'
 import TravelPostDelete from "../TravelPostDelete/TravelPostDelete";
 import { UserContext } from '../../contexts/UserContext'
-
+import { Link } from 'react-router'
 
 
 const TravelPostDetails = () => {
 
-      const { user } = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
 
     const [travelPost, setTravelPost] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [errorData, setErrorData] = useState({})
-    
+
     const { travelPostId } = useParams()
     // console.log("PARAMS:", useParams())
 
- useEffect(() => {
+    useEffect(() => {
         const getData = async () => {
             try {
                 const { data } = await showTravelPost(travelPostId)
@@ -36,7 +36,7 @@ const TravelPostDetails = () => {
         getData()
     }, [travelPostId])
 
-    
+
     return (
         <div className="travelpost-details-container">
 
@@ -52,7 +52,7 @@ const TravelPostDetails = () => {
                 <p>Nothing to display.</p>
             ) : (
 
-                
+
                 <section className="travelpost-details-card">
                     <ul>
 
@@ -91,7 +91,15 @@ const TravelPostDetails = () => {
                         </li>
 
                     </ul>
-                     {user._id === travelPost.author._id &&  <TravelPostDelete travelPostId={travelPostId} />}
+                    {user._id === travelPost.author._id && <TravelPostDelete travelPostId={travelPostId} />}
+
+                    {user._id === travelPost.author._id && (
+                        <Link to={`/travelPost/${travelPostId}/edit`} className="edit-button">
+                            Edit Travel Post
+                        </Link>
+                    )}
+
+
                 </section>
             )}
         </div>

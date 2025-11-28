@@ -35,8 +35,11 @@ a:hover {
   color: var(--green-forest);
 }
 
+
+
 /* Buttons */
-button {
+button,
+.edit-button {
   background: var(--green-forest);
   color: white;
   padding: 0.6rem 1.2rem;
@@ -46,9 +49,12 @@ button {
   transition: 0.2s ease;
   font-size: 1rem;
 }
-button:hover {
+
+button:hover,
+.edit-button:hover {
   background: var(--deep-slate);
 }
+
 
 /* Form Inputs */
 input,
@@ -79,3 +85,5 @@ input:focus, textarea:focus {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
+
+
