@@ -1,11 +1,14 @@
 import './TravelPostCreate.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { countryIndex } from '../../services/country'
 import LoadingIcon from '../LoadingIcon/LoadingIcon'
 import { createTravelPost } from '../../services/travelPosts'
 import { useNavigate, Navigate } from 'react-router'
+import { UserContext } from '../../contexts/UserContext.jsx'
 
 const TravelPostCreate = () => {
+
+    const { user } = useContext(UserContext)
 
     // State
     const [errorData, setErrorData] = useState(null)
@@ -25,7 +28,7 @@ const TravelPostCreate = () => {
 
     })
 
-      const navigate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getData = async () => {
@@ -63,18 +66,20 @@ const TravelPostCreate = () => {
         try {
             const { data } = await createTravelPost(formData)
             // console.log(response)
-        navigate(`/travelPost/${data._id}`)
+            navigate(`/travelPost/${data._id}`)
         } catch (error) {
-      console.log(error)
-      if (error.response.status === 500) {
-        return setErrorData({ message: 'Something went wrong. Please try again.' })
-      }
-      setErrorData(error.response.data)
+            console.log(error)
+            if (error.response.status === 500) {
+                return setErrorData({ message: 'Something went wrong. Please try again.' })
+            }
+            setErrorData(error.response.data)
+        }
     }
-  }
 
-    // console.log(formData)
 
+    if (!user) {
+        return <Navigate to="/sign-in" />
+    }
 
     return (
         <>
