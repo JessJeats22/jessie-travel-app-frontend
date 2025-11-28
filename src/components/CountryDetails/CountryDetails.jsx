@@ -59,7 +59,7 @@ const CountryDetails = () => {
 
             <h1 className="country-title">
                 {country?.name || "Country Details"}
-                
+
             </h1>
 
             {errorData.message ? (
@@ -73,11 +73,9 @@ const CountryDetails = () => {
                     <section className="country-details-card">
                         <ul>
 
-                                <li className="flag-item">
-                    
+                            <li className="flag-item">
                                 {country.flag ? (
                                     <span className="flag-emoji">{country.flag}</span>
-
                                 ) : (
                                     <span className="value">N/A</span>
                                 )}
@@ -88,7 +86,7 @@ const CountryDetails = () => {
                                 <span className="value">{country.population?.toLocaleString()}</span>
                             </li>
 
-                        
+
 
                             <li>
                                 <span className="label">Description:</span>
@@ -133,10 +131,14 @@ const CountryDetails = () => {
                                         {travelPosts.map(post => (
                                             <Link key={post._id} to={`/travelPost/${post._id}`} className="travelpost-card">
 
+                                                <div className="card-flag">
+                                                    {post.country.flag}
+                                                </div>
+
                                                 <h3 className="post-location">{post.location}</h3>
 
-                                                <p className="post-description">
-                                                    {post.whatTheyDid?.slice(0, 80)}{post.whatTheyDid?.length > 80 ? "..." : ""}
+                                                <p className="post-description fade-text">
+                                                    {post.whatTheyDid}
                                                 </p>
 
                                             </Link>

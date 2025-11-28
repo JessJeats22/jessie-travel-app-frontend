@@ -5,6 +5,7 @@ import LoadingIcon from '../LoadingIcon/LoadingIcon'
 import { createTravelPost } from '../../services/travelPosts'
 import { useNavigate, Navigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext.jsx'
+import ImageUploadField from '../ImageUploadField/ImageUploadField'
 
 const TravelPostCreate = () => {
 
@@ -50,7 +51,7 @@ const TravelPostCreate = () => {
     const handleChange = (e) => {
 
         const input = e.target
-      
+
         setFormData({ ...formData, [input.name]: input.value })
 
     }
@@ -126,6 +127,10 @@ const TravelPostCreate = () => {
                         onChange={(e) => handleImageChange(e, 0)}
                     />
                 </div>
+
+                <ImageUploadField
+                    labelText="Upload Travel Post Image"
+                />
 
                 <button type="submit">Create Travel Post </button>
 
