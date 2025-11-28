@@ -18,7 +18,7 @@ const TravelPostDetails = () => {
     const [errorData, setErrorData] = useState({})
 
     const { travelPostId } = useParams()
-    // console.log("PARAMS:", useParams())
+  const navigate = useNavigate()
 
     useEffect(() => {
         const getData = async () => {
@@ -34,7 +34,7 @@ const TravelPostDetails = () => {
             }
         }
         getData()
-    }, [travelPostId])
+    }, [travelPostId, navigate])
 
 
     return (

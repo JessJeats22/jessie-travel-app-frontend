@@ -1,20 +1,20 @@
 
 .navbar {
   display: flex;
-  justify-content: space-between;    /* Logo left, links right */
+  justify-content: space-between;   
   align-items: center;
   padding: 1rem 2rem;
-  background-color: var(--blue-sky);  /* soft outdoor sky blue */
+  background-color: var(--blue-sky); 
   box-shadow: var(--shadow);
   position: sticky;
   top: 0;
-  z-index: 100;                       /* stays above page content */
+  z-index: 100;                     
 }
 
 .navbar__brand a {
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--deep-slate);           /* dark outdoorsy blue */
+  color: var(--deep-slate);         
 }
 
 .navbar__brand a:hover {
@@ -25,7 +25,7 @@
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 1.5rem;                         /* space between links */
+  gap: 1.5rem;                    
 }
 
 .navbar__links a {

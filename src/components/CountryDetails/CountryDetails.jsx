@@ -1,22 +1,26 @@
 import './CountryDetails.css'
 import { useParams } from 'react-router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { countryShow } from '../../services/country'
 import LoadingIcon from '../LoadingIcon/LoadingIcon'
 import { getAllTravelPosts } from '../../services/travelPosts'
 import { Link } from 'react-router'
+import { UserContext } from '../../contexts/UserContext'
 
 
 const CountryDetails = () => {
+
+    const { user } = useContext(UserContext)
+
     const [country, setCountry] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [errorData, setErrorData] = useState({})
     const [travelPosts, setTravelPosts] = useState([]);
 
-    
+
     const { countryId } = useParams()
-    // console.log("PARAMS:", useParams())
-   
+
+
     useEffect(() => {
         const getData = async () => {
             try {
@@ -34,27 +38,28 @@ const CountryDetails = () => {
     }, [countryId])
 
     useEffect(() => {
-    const fetchTravelPosts = async () => {
-        try {
-            const { data } = await getAllTravelPosts();
-            console.log("THIS IS DATA", data)
-            const filtered = data.filter(post => post.country._id === countryId);
-            setTravelPosts(filtered);
-        } catch (error) {
-            console.log("Error fetching posts:", error);
-        }
-    };
+        const fetchTravelPosts = async () => {
+            try {
+                const { data } = await getAllTravelPosts();
+                console.log("THIS IS DATA", data)
+                const filtered = data.filter(post => post.country._id === countryId);
+                setTravelPosts(filtered);
+            } catch (error) {
+                console.log("Error fetching posts:", error);
+            }
+        };
 
-    fetchTravelPosts();
-}, [countryId]);
+        fetchTravelPosts();
+    }, [countryId]);
 
 
-    
+
     return (
         <div className="country-details-container">
 
             <h1 className="country-title">
                 {country?.name || "Country Details"}
+                
             </h1>
 
             {errorData.message ? (
@@ -67,19 +72,23 @@ const CountryDetails = () => {
                 <>
                     <section className="country-details-card">
                         <ul>
+
+                                <li className="flag-item">
+                    
+                                {country.flag ? (
+                                    <span className="flag-emoji">{country.flag}</span>
+
+                                ) : (
+                                    <span className="value">N/A</span>
+                                )}
+                            </li>
+
                             <li>
                                 <span className="label">Population:</span>
                                 <span className="value">{country.population?.toLocaleString()}</span>
                             </li>
 
-                            <li className="flag-item">
-                                <span className="label">Flag:</span>
-                                {country.flag ? (
-                                    <img className="flag" src={country.flag} alt={`${country.name} flag`} />
-                                ) : (
-                                    <span className="value">N/A</span>
-                                )}
-                            </li>
+                        
 
                             <li>
                                 <span className="label">Description:</span>
@@ -105,34 +114,43 @@ const CountryDetails = () => {
                                 <span className="value">{country.currency}</span>
                             </li>
 
-                            <li>
-                                <span className="label">Created by:</span>
-                                <span className="value">{country.createdBy}</span>
-                            </li>
                         </ul>
                     </section>
 
                     <section className="country-travelposts">
                         <h2>Travel Posts for this Country</h2>
 
-                        {travelPosts.length === 0 ? (
-                            <p>No travel posts yet.</p>
+                        {!user ? (
+                            <p className="signin-message">
+                                You must <Link to="/sign-in">sign in</Link> to view and create travel posts.
+                            </p>
                         ) : (
-                            <ul className="travelposts-list">
-                                {travelPosts.map(post => (
-                                    <li key={post._id}>
-                                        <Link to={`/travelPost/${post._id}`}>
-                                            {post.location}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+                            <>
+                                {travelPosts.length === 0 ? (
+                                    <p>No travel posts yet.</p>
+                                ) : (
+                                    <div className="travelposts-grid">
+                                        {travelPosts.map(post => (
+                                            <Link key={post._id} to={`/travelPost/${post._id}`} className="travelpost-card">
 
-                        <Link className="add-post-button" to={`/travelPost/new?country=${countryId}`}>
-                            Add Your Travel Post
-                        </Link>
+                                                <h3 className="post-location">{post.location}</h3>
+
+                                                <p className="post-description">
+                                                    {post.whatTheyDid?.slice(0, 80)}{post.whatTheyDid?.length > 80 ? "..." : ""}
+                                                </p>
+
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
+
+                                <Link className="add-post-button" to={`/travelPost/new?country=${countryId}`}>
+                                    Add A Travel Post!
+                                </Link>
+                            </>
+                        )}
                     </section>
+
                 </>
             )}
         </div>

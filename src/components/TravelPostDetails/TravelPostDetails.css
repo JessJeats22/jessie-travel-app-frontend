@@ -51,8 +51,6 @@
   opacity: 0.85;
 }
 
-
-/* Image row */
 .image-item {
   align-items: flex-start;
 }
@@ -66,7 +64,7 @@
   margin-top: 0.5rem;
 }
 
-/* Error message styling */
+
 .error-message {
   color: red;
   text-align: center;
@@ -74,7 +72,7 @@
   margin-top: 1rem;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 600px) {
   .travelpost-details-card li {
     flex-direction: column;

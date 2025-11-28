@@ -11,16 +11,15 @@ const NavBar = () => {
     return (
         <header className="navbar">
             <div className="navbar__brand">
-                <Link to="/">🌎 Home Page</Link>
+                <Link to="/">🌎 Worldly</Link>
             </div>
 
             <nav className="navbar__links">
                 <Link to="/countries">Countries</Link>
                 {user ? (
                     <>
-                           <Link to="/travelPost">Travel Posts</Link>
                         <Link to="/travelpost/new">Create Post</Link>
-                        <Link to="/sign-in" onClick={signOut}>Sign out</Link>
+                        <Link to="/sign-in" onClick={signOut}>Sign out {user && `(${user.username})`}</Link>
                     </>
                 ) : (
                     <>

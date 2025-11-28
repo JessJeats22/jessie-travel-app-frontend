@@ -16,10 +16,10 @@ const SignUp = () => {
 
     const [errorData, setErrorData] = useState({})
 
-    // Location variables
+
     const navigate = useNavigate()
 
-    // Functions
+ 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
         setErrorData({ ...errorData, [e.target.name]: '' })

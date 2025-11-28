@@ -1,0 +1,85 @@
+.home-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 1rem;
+}
+
+
+.home-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--deep-slate);
+  margin-bottom: 1rem;
+}
+
+
+.home-hero {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.home-tagline {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--deep-slate);
+}
+
+.home-info-block {
+  margin: 1.5rem 0;
+  color: var(--deep-slate);
+}
+
+.home-info-block p {
+  margin: 0.5rem 0;
+}
+
+
+.home-signup-btn {
+  background: var(--green-forest);
+  color: white;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1.2rem;
+}
+
+.home-signup-btn:hover {
+  background: var(--deep-slate);
+  color: white;
+}
+
+
+.home-welcome {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.welcome-message {
+  margin: 1rem 0 2rem;
+}
+
+.home-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.home-action-btn {
+  background: var(--green-forest);
+  color: white;
+  padding: 0.7rem 1.2rem;
+  text-decoration: none;
+  border-radius: var(--radius);
+}
+
+.home-action-btn:hover {
+  background: var(--deep-slate);
+  color: white;
+}

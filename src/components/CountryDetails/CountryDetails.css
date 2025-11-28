@@ -5,7 +5,7 @@
   padding: 0 1rem;
 }
 
-/* Page title */
+
 .country-title {
   text-align: center;
   font-size: 2.2rem;
@@ -13,7 +13,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* Card container */
+
 .country-details-card {
   background: white;
   padding: 2rem;
@@ -21,7 +21,7 @@
   box-shadow: var(--shadow);
 }
 
-/* List styling */
+
 .country-details-card ul {
   list-style: none;
   display: flex;
@@ -29,7 +29,7 @@
   gap: 1.2rem;
 }
 
-/* Label + Value styling */
+
 .country-details-card li {
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@
   font-size: 1rem;
 }
 
-/* Flag image */
+
 .flag-item {
   display: flex;
   flex-direction: column;
@@ -60,16 +60,12 @@
   box-shadow: var(--shadow);
 }
 
-/* Error message */
+
 .error-message {
   color: red;
   text-align: center;
   margin-bottom: 1rem;
 }
-
-/* ============================= */
-/* ✈️ Travel Posts Section       */
-/* ============================= */
 
 .country-travelposts {
   margin-top: 3rem;
@@ -86,7 +82,7 @@
   text-align: center;
 }
 
-/* Travel posts list */
+
 .travelposts-list {
   list-style: none;
   padding: 0;
@@ -95,7 +91,7 @@
   gap: 0.8rem;
 }
 
-/* Each post list item */
+
 .travelposts-list li {
   background: var(--light-sage);
   padding: 0.8rem 1rem;
@@ -104,13 +100,13 @@
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-/* Hover effect for list item */
+
 .travelposts-list li:hover {
   background: var(--sage);
   transform: translateY(-2px);
 }
 
-/* Links inside posts list */
+
 .travelposts-list a {
   color: var(--deep-slate);
   font-weight: 600;
@@ -122,7 +118,7 @@
   color: var(--green-forest);
 }
 
-/* Add Post Button */
+
 .add-post-button {
   display: inline-block;
   margin-top: 2rem;
@@ -137,8 +133,58 @@
   text-align: center;
 }
 
-/* Hover effect for the button */
+
 .add-post-button:hover {
   background: var(--green-forest-dark);
   transform: translateY(-2px);
+}
+
+
+
+.travelposts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+
+.travelpost-card {
+  background: white;
+  width: 260px;
+  padding: 1.2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--deep-slate);
+  display: block;
+}
+
+
+.travelpost-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+
+.post-location {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--green-forest);
+  margin-bottom: 0.5rem;
+}
+
+
+.post-description {
+  font-size: 1rem;
+  color: var(--deep-slate);
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.flag-emoji {
+  font-size: 3rem;
+  display: inline-block;
 }

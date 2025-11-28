@@ -10,7 +10,7 @@ const TravelPostCreate = () => {
 
     const { user } = useContext(UserContext)
 
-    // State
+
     const [errorData, setErrorData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [countries, setCountries] = useState([])
@@ -50,7 +50,7 @@ const TravelPostCreate = () => {
     const handleChange = (e) => {
 
         const input = e.target
-        // console.log("WHAT IS E", e)
+      
         setFormData({ ...formData, [input.name]: input.value })
 
     }

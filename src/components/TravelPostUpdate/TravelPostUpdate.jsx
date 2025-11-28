@@ -3,6 +3,9 @@ import { useState, useEffect, useContext } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { UserContext } from '../../contexts/UserContext.jsx'
 import { showTravelPost, updateTravelPost } from '../../services/travelPosts'
+import { countryIndex } from '../../services/country'
+
+
 
 const TravelPostUpdate = () => {
 
@@ -79,7 +82,19 @@ const TravelPostUpdate = () => {
     getData()
   }, [travelPostId, navigate])
 
-  
+  useEffect(() => {
+  const loadCountries = async () => {
+    try {
+      const { data } = await countryIndex()
+      setCountries(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  loadCountries()
+}, [])
+
+
 
   return (
     <>

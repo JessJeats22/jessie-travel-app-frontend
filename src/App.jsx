@@ -32,8 +32,6 @@ const App = () => {
          <Route path="/travelPost/:travelPostId" element={<TravelPostDetails />} />
           <Route path="/travelPost/new" element={<TravelPostCreate />} />
           <Route path="/travelPost/:travelPostId/edit" element={<TravelPostUpdate />} />
-
-
         </Routes>
 
       </main>
