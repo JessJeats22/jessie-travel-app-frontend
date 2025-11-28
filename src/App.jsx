@@ -27,10 +27,9 @@ const App = () => {
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/sign-up" element ={<SignupPage />} />
           <Route path="/countries" element ={<CountryIndex />} />
-          <Route path="/travelPost/:travelPostId" element={<TravelPostDetails />} />
           <Route path="/countries/:countryId" element ={<CountryDetails />} />
           <Route path="/travelPost/new" element={<TravelPostCreate />} />
-          
+          <Route path="/travelPost/:travelPostId" element={<TravelPostDetails />} />
         </Routes>
 
       </main>

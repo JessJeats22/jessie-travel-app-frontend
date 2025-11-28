@@ -3,14 +3,19 @@ import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { countryShow } from '../../services/country'
 import LoadingIcon from '../LoadingIcon/LoadingIcon'
+import { getAllTravelPosts } from '../../services/travelPosts'
+import { Link } from 'react-router'
+
 
 const CountryDetails = () => {
     const [country, setCountry] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [errorData, setErrorData] = useState({})
+    const [travelPosts, setTravelPosts] = useState([]);
+
     
     const { countryId } = useParams()
-    console.log("PARAMS:", useParams())
+    // console.log("PARAMS:", useParams())
    
     useEffect(() => {
         const getData = async () => {
@@ -28,6 +33,23 @@ const CountryDetails = () => {
         getData()
     }, [countryId])
 
+    useEffect(() => {
+    const fetchTravelPosts = async () => {
+        try {
+            const { data } = await getAllTravelPosts();
+            console.log("THIS IS DATA", data)
+            const filtered = data.filter(post => post.country._id === countryId);
+            setTravelPosts(filtered);
+        } catch (error) {
+            console.log("Error fetching posts:", error);
+        }
+    };
+
+    fetchTravelPosts();
+}, [countryId]);
+
+
+    
     return (
         <div className="country-details-container">
 
@@ -42,57 +64,78 @@ const CountryDetails = () => {
             ) : !country ? (
                 <p>Nothing to display.</p>
             ) : (
-                <section className="country-details-card">
-                    <ul>
+                <>
+                    <section className="country-details-card">
+                        <ul>
+                            <li>
+                                <span className="label">Population:</span>
+                                <span className="value">{country.population?.toLocaleString()}</span>
+                            </li>
 
-                        <li>
-                            <span className="label">Population:</span>
-                            <span className="value">{country.population?.toLocaleString()}</span>
-                        </li>
+                            <li className="flag-item">
+                                <span className="label">Flag:</span>
+                                {country.flag ? (
+                                    <img className="flag" src={country.flag} alt={`${country.name} flag`} />
+                                ) : (
+                                    <span className="value">N/A</span>
+                                )}
+                            </li>
 
-                        <li className="flag-item">
-                            <span className="label">Flag:</span>
-                            {country.flag ? (
-                                <img className="flag" src={country.flag} alt={`${country.name} flag`} />
-                            ) : (
-                                <span className="value">N/A</span>
-                            )}
-                        </li>
+                            <li>
+                                <span className="label">Description:</span>
+                                <span className="value">{country.description}</span>
+                            </li>
 
-                        <li>
-                            <span className="label">Description:</span>
-                            <span className="value">{country.description}</span>
-                        </li>
+                            <li>
+                                <span className="label">Continent:</span>
+                                <span className="value">{country.continent}</span>
+                            </li>
 
-                        <li>
-                            <span className="label">Continent:</span>
-                            <span className="value">{country.continent}</span>
-                        </li>
+                            <li>
+                                <span className="label">Languages:</span>
+                                <span className="value">
+                                    {Array.isArray(country.languages)
+                                        ? country.languages.join(", ")
+                                        : country.languages}
+                                </span>
+                            </li>
 
-                        <li>
-                            <span className="label">Languages:</span>
-                            <span className="value">
-                                {Array.isArray(country.languages)
-                                    ? country.languages.join(", ")
-                                    : country.languages}
-                            </span>
-                        </li>
+                            <li>
+                                <span className="label">Currency:</span>
+                                <span className="value">{country.currency}</span>
+                            </li>
 
-                        <li>
-                            <span className="label">Currency:</span>
-                            <span className="value">{country.currency}</span>
-                        </li>
+                            <li>
+                                <span className="label">Created by:</span>
+                                <span className="value">{country.createdBy}</span>
+                            </li>
+                        </ul>
+                    </section>
 
-                        <li>
-                            <span className="label">Created by:</span>
-                            <span className="value">{country.createdBy}</span>
-                        </li>
+                    <section className="country-travelposts">
+                        <h2>Travel Posts for this Country</h2>
 
-                    </ul>
-                </section>
+                        {travelPosts.length === 0 ? (
+                            <p>No travel posts yet.</p>
+                        ) : (
+                            <ul className="travelposts-list">
+                                {travelPosts.map(post => (
+                                    <li key={post._id}>
+                                        <Link to={`/travelPost/${post._id}`}>
+                                            {post.location}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+
+                        <Link className="add-post-button" to={`/travelPost/new?country=${countryId}`}>
+                            Add Your Travel Post
+                        </Link>
+                    </section>
+                </>
             )}
         </div>
     )
 }
-
 export default CountryDetails

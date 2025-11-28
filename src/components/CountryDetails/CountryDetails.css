@@ -1,6 +1,3 @@
-/* ============================= */
-/* 🌍 Country Details Page Style */
-/* ============================= */
 
 .country-details-container {
   max-width: 900px;
@@ -68,4 +65,80 @@
   color: red;
   text-align: center;
   margin-bottom: 1rem;
+}
+
+/* ============================= */
+/* ✈️ Travel Posts Section       */
+/* ============================= */
+
+.country-travelposts {
+  margin-top: 3rem;
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.country-travelposts h2 {
+  font-size: 1.8rem;
+  color: var(--green-forest);
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+/* Travel posts list */
+.travelposts-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Each post list item */
+.travelposts-list li {
+  background: var(--light-sage);
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover effect for list item */
+.travelposts-list li:hover {
+  background: var(--sage);
+  transform: translateY(-2px);
+}
+
+/* Links inside posts list */
+.travelposts-list a {
+  color: var(--deep-slate);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.travelposts-list a:hover {
+  color: var(--green-forest);
+}
+
+/* Add Post Button */
+.add-post-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.9rem 1.4rem;
+  background: var(--green-forest);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: background 0.2s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+/* Hover effect for the button */
+.add-post-button:hover {
+  background: var(--green-forest-dark);
+  transform: translateY(-2px);
 }

@@ -21,3 +21,23 @@ export const showTravelPost = (id) => {
     }
   })
 }
+
+export const getAllTravelPosts = () => {
+  return api.get('', {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  });
+};
+
+export const deleteTravelPost = (id) => {
+  return api.delete(`/${id}`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  })
+}
+
+
+
+

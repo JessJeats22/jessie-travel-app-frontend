@@ -1,10 +1,17 @@
 import './TravelPostDetails.css'
-import { useParams } from 'react-router'
-import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router'
+import { useEffect, useState, useContext } from 'react'
 import LoadingIcon from '../LoadingIcon/LoadingIcon'
 import {showTravelPost}  from '../../services/travelPosts'
+import TravelPostDelete from "../TravelPostDelete/TravelPostDelete";
+import { UserContext } from '../../contexts/UserContext'
+
+
 
 const TravelPostDetails = () => {
+
+      const { user } = useContext(UserContext)
+
 
     const [travelPost, setTravelPost] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -44,6 +51,8 @@ const TravelPostDetails = () => {
             ) : !travelPost ? (
                 <p>Nothing to display.</p>
             ) : (
+
+                
                 <section className="travelpost-details-card">
                     <ul>
 
@@ -82,6 +91,7 @@ const TravelPostDetails = () => {
                         </li>
 
                     </ul>
+                     {user._id === travelPost.author._id &&  <TravelPostDelete travelPostId={travelPostId} />}
                 </section>
             )}
         </div>
