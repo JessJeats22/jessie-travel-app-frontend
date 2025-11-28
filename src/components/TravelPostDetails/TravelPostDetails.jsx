@@ -18,7 +18,7 @@ const TravelPostDetails = () => {
     const [errorData, setErrorData] = useState({})
 
     const { travelPostId } = useParams()
-  const navigate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getData = async () => {
@@ -82,22 +82,39 @@ const TravelPostDetails = () => {
                         </li>
 
                         <li className="image-item">
-                            <span className="label">Image:</span>
-                            <img
-                                src={travelPost.images[0].url}
-                                alt={`${travelPost.location} travel-post-image`}
-                                className="travelpost-image"
-                            />
+                            <span className="label"></span>
+                            <img src={travelPost.image} alt="" className="travelpost-image" />
                         </li>
 
-                    </ul>
-                    {user._id === travelPost.author._id && <TravelPostDelete travelPostId={travelPostId} />}
 
-                    {user._id === travelPost.author._id && (
-                        <Link to={`/travelPost/${travelPostId}/edit`} className="edit-button">
-                            Edit Travel Post
+
+                    </ul>
+                    <div className="travelpost-actions">
+                        {user._id === travelPost.author._id && (
+                            <TravelPostDelete travelPostId={travelPostId} />
+                        )}
+
+                        {user._id === travelPost.author._id && (
+                            <Link to={`/travelPost/${travelPostId}/edit`} className="edit-button">
+                                Edit Travel Post
+                            </Link>
+                        )}
+
+                        <Link
+                            to={`/countries/${travelPost.country._id}`}
+                            className="edit-button"
+                        >
+                            Back to {travelPost.country.name}
                         </Link>
-                    )}
+
+                        <Link to="/countries" className="edit-button">
+                            Back to All Countries
+                        </Link>
+
+
+                    </div>
+
+
 
 
                 </section>

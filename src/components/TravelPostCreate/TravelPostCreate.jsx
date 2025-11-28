@@ -20,12 +20,7 @@ const TravelPostCreate = () => {
         location: "",
         whatTheyDid: "",
         recommendations: "",
-        images: [
-            {
-                url: "",
-                caption: ""
-            }
-        ]
+        image: ""
 
     })
 
@@ -56,11 +51,14 @@ const TravelPostCreate = () => {
 
     }
 
-    const handleImageChange = (e, index) => {
-        const updatedImages = [...formData.images];
-        updatedImages[index].url = e.target.value;
-        setFormData({ ...formData, images: updatedImages });
-    };
+     // IMAGE UPLOADER HANDLER
+    const setTravelPostImage = (imageURL) => {
+        setFormData(prev => ({
+            ...prev,
+            image: imageURL
+        }))
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -117,19 +115,12 @@ const TravelPostCreate = () => {
                     <input type="text" name="recommendations" id="recommendations" placeholder='Recommendations' value={formData.recommendations} onChange={handleChange} required />
                 </div>
 
-                <div className="form-control">
-                    <label htmlFor="image-url">Image URL</label>
-                    <input
-                        type="text"
-                        id="image-url"
-                        placeholder="Image URL"
-                        value={formData.images[0].url}
-                        onChange={(e) => handleImageChange(e, 0)}
-                    />
-                </div>
-
+             
                 <ImageUploadField
                     labelText="Upload Travel Post Image"
+                    fieldName="image"
+                    setImage={setTravelPostImage}
+                    imageURL={formData.image}
                 />
 
                 <button type="submit">Create Travel Post </button>

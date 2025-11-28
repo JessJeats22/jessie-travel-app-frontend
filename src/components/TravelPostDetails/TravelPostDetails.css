@@ -51,19 +51,6 @@
   opacity: 0.85;
 }
 
-.image-item {
-  align-items: flex-start;
-}
-
-.travelpost-image {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin-top: 0.5rem;
-}
-
 
 .error-message {
   color: red;
@@ -88,5 +75,21 @@
   .value {
     margin-top: 0.25rem;
   }
+}
+
+.image-item {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem 0;
+  border-bottom: none;
+}
+
+.travelpost-image {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-top: 0.5rem;
 }
 

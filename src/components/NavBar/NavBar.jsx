@@ -15,10 +15,10 @@ const NavBar = () => {
             </div>
 
             <nav className="navbar__links">
-                <Link to="/countries">Countries</Link>
+                <Link to="/countries">All Countries</Link>
                 {user ? (
                     <>
-                        <Link to="/travelpost/new">Create Post</Link>
+                        <Link to="/travelpost/new">Create Travel Post</Link>
                         <Link to="/sign-in" onClick={signOut}>Sign out {user && `(${user.username})`}</Link>
                     </>
                 ) : (

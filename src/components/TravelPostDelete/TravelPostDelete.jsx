@@ -11,6 +11,10 @@ const TravelPostDelete = ({travelPostId}) => {
   const navigate = useNavigate()
 
     const handleDelete = async () => {
+
+       const sure = window.confirm("Are you sure you want to delete this post?")
+
+    if (!sure) return
     try {
       await deleteTravelPost(travelPostId)
       navigate('/countries')
@@ -30,6 +34,8 @@ const TravelPostDelete = ({travelPostId}) => {
   
     return (
     <>
+
+    
       <button onClick={handleDelete}>
         Delete Post
       </button>

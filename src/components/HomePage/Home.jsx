@@ -40,7 +40,7 @@ const Home = () => {
       {/* SIGNED IN */}
       {user && (
         <section className="home-welcome">
-          <h1 className="home-title">🌎 Welcome back, {user.username}!</h1>
+          <h1 className="home-title">🌎 Welcome back, {user.username}!🌎</h1>
 
           <p className="welcome-message">
             Ready for your next adventure?  

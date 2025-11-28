@@ -1,43 +1,38 @@
 import './TravelPostUpdate.css'
 import { useState, useEffect, useContext } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams, Navigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext.jsx'
 import { showTravelPost, updateTravelPost } from '../../services/travelPosts'
 import { countryIndex } from '../../services/country'
-
-
+import ImageUploadField from '../ImageUploadField/ImageUploadField'
 
 const TravelPostUpdate = () => {
-
-  // Context
   const { user } = useContext(UserContext)
+  const { travelPostId } = useParams()
+  const navigate = useNavigate()
 
-  // State
+  if (!user) return <Navigate to="/sign-in" />
+
   const [formData, setFormData] = useState({
     country: "",
     location: "",
     whatTheyDid: "",
     recommendations: "",
-    images: [{ url: "", caption: "" }]
+    image: ""
   })
 
-  const [countries, setCountries] = useState([])  
+  const [countries, setCountries] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [errorData, setErrorData] = useState({})  
-
-  const { travelPostId } = useParams()
-  const navigate = useNavigate()
+  const [errorData, setErrorData] = useState({})
 
   const handleChange = (e) => {
     const input = e.target
     setFormData({ ...formData, [input.name]: input.value })
   }
 
-  const handleImageChange = (e, index) => {
-    const updated = [...formData.images]
-    updated[index] = { url: e.target.value }
-    setFormData({ ...formData, images: updated })
-  } 
+  const setTravelPostImage = (imageURL) => {
+    setFormData(prev => ({ ...prev, image: imageURL }))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -53,8 +48,9 @@ const TravelPostUpdate = () => {
     }
   }
 
+  // Load post data
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       try {
         const { data } = await showTravelPost(travelPostId)
 
@@ -63,45 +59,41 @@ const TravelPostUpdate = () => {
           location: data.location,
           whatTheyDid: data.whatTheyDid,
           recommendations: data.recommendations,
-          images: data.images.length ? data.images : [{ url: "", caption: "" }]
+          image: data.image || ""
         })
       } catch (error) {
         console.log(error)
         const { status, data } = error.response
-        if (status === 500) {
-          setErrorData({ message: 'Something went wrong. Please try again.' })
-        } else if (status === 404) {
-          navigate('/page-not-found')
-        } else {
-          setErrorData(data)
-        }
+        if (status === 404) navigate("/page-not-found")
+        else setErrorData(data)
       } finally {
         setIsLoading(false)
       }
     }
-    getData()
+
+    fetchData()
   }, [travelPostId, navigate])
 
+  // Load countries
   useEffect(() => {
-  const loadCountries = async () => {
-    try {
-      const { data } = await countryIndex()
-      setCountries(data)
-    } catch (error) {
-      console.log(error)
+    const loadCountries = async () => {
+      try {
+        const { data } = await countryIndex()
+        setCountries(data)
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }
-  loadCountries()
-}, [])
+    loadCountries()
+  }, [])
 
-
+  if (isLoading) return <p>Loading...</p>
 
   return (
     <>
       <h1>Update your Travel Post</h1>
 
       <form onSubmit={handleSubmit}>
-
         <div className='form-control'>
           <select
             name="country"
@@ -111,7 +103,6 @@ const TravelPostUpdate = () => {
             required
           >
             <option value="">-- Select a country --</option>
-
             {countries.map(country => (
               <option key={country._id} value={country._id}>
                 {country.name}
@@ -126,7 +117,6 @@ const TravelPostUpdate = () => {
             type="text"
             name="location"
             id="location"
-            placeholder="Location"
             value={formData.location}
             onChange={handleChange}
             required
@@ -135,11 +125,9 @@ const TravelPostUpdate = () => {
 
         <div className='form-control'>
           <label htmlFor="whatTheyDid">Tell us about your trip!</label>
-          <input
-            type="text"
+          <textarea
             name="whatTheyDid"
             id="whatTheyDid"
-            placeholder="Tell us about your trip!"
             value={formData.whatTheyDid}
             onChange={handleChange}
             required
@@ -148,30 +136,24 @@ const TravelPostUpdate = () => {
 
         <div className='form-control'>
           <label htmlFor="recommendations">Recommendations</label>
-          <input
-            type="text"
+          <textarea
             name="recommendations"
             id="recommendations"
-            placeholder="Recommendations"
             value={formData.recommendations}
             onChange={handleChange}
             required
           />
         </div>
 
-        <div className="form-control">
-          <label htmlFor="image-url">Image URL</label>
-          <input
-            type="text"
-            id="image-url"
-            placeholder="Image URL"
-            value={formData.images[0].url}
-            onChange={(e) => handleImageChange(e, 0)}
-          />
-        </div>
+        {/* Use the exact same ImageUploadField as Create */}
+        <ImageUploadField
+          labelText="Upload Travel Post Image"
+          fieldName="image"
+          setImage={setTravelPostImage}
+          imageURL={formData.image}
+        />
 
         <button type="submit">Update Travel Post</button>
-
       </form>
     </>
   )
